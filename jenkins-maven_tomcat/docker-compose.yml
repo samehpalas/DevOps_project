@@ -1,0 +1,25 @@
+#dockarized jenkins for CICD pipeline: the developed& merged code to build package using xyz [CI/CD] to deploy it in tomcat [CD]
+version: "3.7"
+services:
+  jenkins:
+    image: jenkins/jenkins
+    ports:
+      - "8080:8080"
+      - "50000:50000"
+    volumes:
+          - jenkins:/var/jenkins_home:rw
+          - war:/mnt/:rw   #war is shared dir
+    container_name: jenkins
+  tomcat:
+    image: tomcat
+    ports:
+      - "7777:7777"
+    container_name: tomcat
+    depends_on:
+      - jenkins
+    volumes:
+     - war:/usr/local/tomcat/webapps    #war is shared dir
+
+volumes:
+   jenkins:
+   war:
