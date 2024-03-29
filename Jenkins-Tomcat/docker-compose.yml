@@ -1,3 +1,4 @@
+#dockarized jenkins for CICD to build &merge code and result package [CI] to deploy it in tomcat [CD]
 version: '3.2'
 services:
   jenkins:
