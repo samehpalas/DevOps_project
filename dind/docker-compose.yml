@@ -1,18 +1,17 @@
+#dockarized jenkins for CICD for importing developed&merged code and build package using xyz [CI/CD] to deploy it in tomcat [CD]
+version: "3.7"
 services:
   jenkins:
     image: jenkins/jenkins:lts
-    user: root
     ports:
       - "8080:8080"
+      - "50000:50000"
     volumes:
-      - ./jenkins:/var/jenkins_home:rw
-      - /run/docker.sock:/var/run/docker.sock
-      - /usr/bin/docker:/usr/bin/docker
-      - ./war:/mnt/:rw
-    ports:
-      - 8080:8080
+          -  ./jenkins:/var/jenkins_home:rw
+          -  /run/docker.sock:/var/run/docker.sock
+          -  /usr/bin/docker:/usr/bin/docker
+          -  ./war:/mnt/:rw   #war is shared dir
     container_name: jenkins
-
   artifactory:
     image: artifactory-oss:5.4.4
     ports:
@@ -20,11 +19,12 @@ services:
     container_name: artifactory
     volumes:
       - ./artifactory:/var/opt/jfrog/artifactory:rw
-
   tomcat:
     image: tomcat
     ports:
-      - 7777:8080
+      - "7777:8080"
     container_name: tomcat
+    depends_on:
+      - jenkins
     volumes:
-      - ./war/:/usr/local/tomcat/webapps:rw
+      - ./war:/usr/local/tomcat/webapps:rw    #war is shared dir
