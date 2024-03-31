@@ -1,3 +1,4 @@
+Ensure EC2 SG inboud are opened with the specific ports
 install docker: https://docs.docker.com/engine/install/ubuntu/
 
 
