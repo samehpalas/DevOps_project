@@ -23,6 +23,9 @@ kubectl create ns $NAMESPACE || true
 helm install $PROMETHEUS_RELEASENAME prometheus-community/prometheus --namespace $NAMESPACE --values="$PWD/Prometheus/values-prometheus.yaml"
 helm install $GRAFANA_RELEASENAME grafana/grafana --namespace $NAMESPACE --values="$PWD/Grafana/values-grafana.yaml"
 
+#show status
+helm repo ls
+helm list -n $NAMESPACE
 # Wait for the pods to start for url
 sleep 60s
 
