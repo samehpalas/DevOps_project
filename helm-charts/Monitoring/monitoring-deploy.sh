@@ -23,7 +23,7 @@ kubectl create ns $NAMESPACE || true
 helm install $PROMETHEUS_RELEASENAME prometheus-community/prometheus --namespace $NAMESPACE --values="$PWD/Prometheus/values-prometheus.yaml"
 helm install $GRAFANA_RELEASENAME grafana/grafana --namespace $NAMESPACE --values="$PWD/Grafana/values-grafana.yaml"
 
-# Wait for the pods to start
+# Wait for the pods to start for url
 sleep 60s
 
 PROMETHEUS_URL=$(minikube service -n monitoring $PROMETHEUS_SVC --url)
@@ -33,6 +33,6 @@ GRAFANA_URL=$(minikube service -n monitoring $GRAFANA_SVC --url)
 echo "Prometheus URL: $PROMETHEUS_URL"
 echo "Grafana URL: $GRAFANA_URL"
 
-# Open URL on browser
+# Open URL on browser automatically
 xdg-open $PROMETHEUS_URL
 xdg-open $GRAFANA_URL
