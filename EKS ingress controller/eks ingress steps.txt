@@ -1,5 +1,7 @@
-## Create IAM OIDC provider
+## Create IAM OIDC provider for SA to grant permission on AWS rsrcs so POD(APP) get that token from SA: 
+## more details on https://cloud.theodo.com/en/blog/aws-eks-iam
 eksctl utils associate-iam-oidc-provider --region us-east-2 --cluster EKS01 --approve
+
 
 ##Download an IAM policy for the AWS Load Balancer Controller that allows it to make calls to AWS APIs on your behalf. (For all region except: AWS GovCloud (US-East) or AWS GovCloud (US-East))
 curl -O https://raw.githubusercontent.com/kubernetes-sigs/aws-load-balancer-controller/v2.7.1/docs/install/iam_policy.json
