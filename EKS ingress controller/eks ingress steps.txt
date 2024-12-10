@@ -19,6 +19,8 @@ eksctl create iamserviceaccount \
   --attach-policy-arn=arn:aws:iam::423357588208:policy/AWSLoadBalancerControllerIAMPolicy \
   --approve
 
+kubectl create sa aws-load-balancer-controller -n kube-system
+
 ##Add anotation to the SA
 kubectl annotate serviceaccount -n kube-system aws-load-balancer-controller \
     eks.amazonaws.com/sts-regional-endpoints=true
